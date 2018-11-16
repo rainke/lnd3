@@ -1,11 +1,19 @@
 namespace Test {
-    // const scale = d3.scaleLinear()
-    //     .domain([0, 10])
-    //     .range([0, 30]);
-    export const h = d3.histogram()
-    .domain([0, 10])
-    .thresholds(5)
-    // .value(3);
-    const bins = h([3, 4, 5, 4, 3]);
-    console.log(bins);
+    const w = 600, h = 600;
+    const svg = d3.select('#root').append('svg').attr('width', w).attr('height', h);
+    export const g = svg.append('g');
+    export const brush = d3.brush()
+        .on('start', function() {
+            brush.move(g, [[0, 0], [80, 80]])
+        })
+        .on('brush', function(){
+            console.log('brush');
+        })
+        .on('end', function(){
+            console.log('end');
+        });
+    g.call(brush);
+    // setTimeout(function(){
+    //     g.on('.brush', null);
+    // }, 1000)
 }
